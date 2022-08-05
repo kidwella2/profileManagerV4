@@ -1,0 +1,54 @@
+    for profile in Profile_List:  # Check each existing spline against profile list
+        Taxis = []
+        Xaxis = []
+        Vaxis = []
+        Aaxis = []
+        Jaxis = []
+        #displacement
+        if profile + '1' not in mod.DataElements.keys():  # If splines don't exist create them
+            for key in motionparams.keys():
+                if profile in key:
+                    obj = motionparams[key]
+                    for t in obj.Trange_Segment:
+                        Taxis.append(t)
+                    for x in obj.xplot:
+                        Xaxis.append(x)
+            #create displacement spline
+            mod.DataElements.createSpline(name=profile + '1', x=Taxis, y=Xaxis)
+            print('Created Spline:', profile + '1', 'Type:', obj.fit)
+        #velocity
+        if profile + '2' not in mod.DataElements.keys():  # If splines don't exist create them
+            for key in motionparams.keys():
+                if profile in key:
+                    obj = motionparams[key]
+                    for t in obj.Trange_Segment:
+                        Taxis.append(t)
+                    for v in obj.vplot:
+                        Vaxis.append(v)
+            #create velocity spline
+            mod.DataElements.createSpline(name=profile + '2', x=Taxis, y=Vaxis)
+            print('Created Spline:', profile + '2', 'Type:', obj.fit)
+        #acceleration
+        if profile + '3' not in mod.DataElements.keys():  # If splines don't exist create them
+            for key in motionparams.keys():
+                if profile in key:
+                    obj = motionparams[key]
+                    for t in obj.Trange_Segment:
+                        Taxis.append(t)
+                    for a in obj.aplot:
+                        Aaxis.append(a)
+            #create acceleration spline
+            mod.DataElements.createSpline(name=profile + '3', x=Taxis, y=Aaxis)
+            print('Created Spline:', profile + '3', 'Type:', obj.fit)
+        #jerk
+        if profile + '4' not in mod.DataElements.keys():  # If splines don't exist create them
+            for key in motionparams.keys():
+                if profile in key:
+                    obj = motionparams[key]
+                    for t in obj.Trange_Segment:
+                        Taxis.append(t)
+                    for j in obj.jplot:
+                        Jaxis.append(j)
+            #creates jerk spline
+            mod.DataElements.createSpline(name=profile + '4', x=Taxis, y=Jaxis)
+            print('Created Spline:', profile + '4', 'Type:', obj.fit)
